@@ -1,0 +1,22 @@
+﻿{
+  "assembly": [
+    "CarouselCellType.dll"
+  ],
+  "javascript": [
+    "Resources\\carousel\\bootstrap.min.js",
+    "Resources\\CarouselCellType.js"
+  ],
+  "css": [
+    "Resources\\carousel\\forguncyPluginBootstrap.min.css"
+  ],
+  "image": "Resources\\PluginLogo.png",
+  "description": "CarouselCellType can switch images one by one.",
+  "description_cn": "本单元格类型可以进行图片的轮转切换。",
+  "description_ja": "複数の画像を切り替えて表示するセル型です。",
+  "name_ja": "カルーセル型セル",
+  "name": "CarouselCellType",
+  "name_cn": "图片轮转",
+  "pluginType": "cellType",
+  "guid": "289c426a-b02f-4d0a-80ed-59e624674d0b",
+  "version": "1.0.0.0"
+}

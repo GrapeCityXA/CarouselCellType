@@ -1,0 +1,104 @@
+﻿<local:MyUserControl x:Class="CarouselCellType.ImagesEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+             xmlns:local="clr-namespace:CarouselCellType"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="700" Height="320">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="5 10 5 0">
+            <TextBlock Padding="0 3" VerticalAlignment="Center">
+                    <Hyperlink TextDecorations="{x:Null}" Click="AddImageButton_Click">
+                        <Image Height="20" Width="20" Source="pack://application:,,,/CarouselCellType;component/Images/Add.png"
+                                   ToolTip="{x:Static local:Resource.ImagesEditor_AddImageToolTip}"></Image>
+                    </Hyperlink>
+            </TextBlock>
+
+            <TextBlock Padding="0 3" Margin="10 0 0 0">
+                    <Hyperlink TextDecorations="{x:Null}" Click="DeleteImageButton_Click">
+                        <Image Height="20" Width="20" Source="pack://application:,,,/CarouselCellType;component/Images/Delete.png"
+                                   ToolTip="{x:Static local:Resource.ImagesEditor_DeleteImageToolTip}"></Image>
+                    </Hyperlink>
+            </TextBlock>
+
+            <TextBlock Padding="0 3" Margin="10 0 0 0">
+                    <Hyperlink TextDecorations="{x:Null}" Click="UpImageButton_Click">
+                        <Image Height="20" Width="20" Source="pack://application:,,,/CarouselCellType;component/Images/Up.png"
+                               ToolTip="{x:Static local:Resource.ImagesEditor_UpImageToolTip}"></Image>
+                    </Hyperlink>
+            </TextBlock>
+
+            <TextBlock Padding="0 3" Margin="10 0 0 0">
+                    <Hyperlink TextDecorations="{x:Null}" Click="DownImageButton_Click">
+                        <Image Height="20" Width="20" Source="pack://application:,,,/CarouselCellType;component/Images/Down.png"
+                               ToolTip="{x:Static local:Resource.ImagesEditor_DownImageToolTip}"></Image>
+                    </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+        <ListBox Grid.Row="1" Margin="5" Padding="5 3" Width="260" ItemsSource="{Binding ImageInfos}" SelectedItem="{Binding SelectedImageInfo}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Padding="5 3" Content="{Binding Caption}"></Label>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="0 5" Width="580" DataContext="{Binding SelectedImageInfo}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Background="White" Header="{x:Static local:Resource.ImagesEditor_CommandsSettings}" Padding="3">
+                <TextBlock VerticalAlignment="Center" Margin="5 3">
+                        <Hyperlink Click="SetCommandListHyperlink_Click" ToolTip="{x:Static local:Resource.ImagesEditor_EditCommandsToolTip}">
+                            <TextBlock Text="{x:Static local:Resource.ImagesEditor_EditCommands}"></TextBlock>
+                        </Hyperlink>
+                </TextBlock>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Background="White" Header="{x:Static local:Resource.ImagesEditor_PropertiesSettings}" Margin="0 5 0 0" Padding="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="{x:Static local:Resource.ImagesEditor_CaptionLabel}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Caption}" VerticalAlignment="Center"></TextBox>
+                    <Label Grid.Row="1" Grid.Column="0" Content="{x:Static local:Resource.ImagesEditor_DescriptionLabel}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Description}" VerticalAlignment="Center"  VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" MinLines="3" Height="60"></TextBox>
+                    <Label Grid.Row="2" Grid.Column="0" Content="{x:Static local:Resource.ImagesEditor_ImagePathLabel}" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                    <Grid Grid.Row="2" Grid.Column="1" Margin="5" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding ImagePath}" TextTrimming="WordEllipsis" VerticalAlignment="Center" ToolTip="{Binding ImagePath}"></TextBlock>
+                        <TextBlock Grid.Column="1" Margin="5 0" VerticalAlignment="Center" Visibility="{Binding DeleteImageIconVisibility}">                        
+                            <Hyperlink Click="DeleteImageIcon_Click" TextDecorations="{x:Null}">
+                                <Image Width="16" Height="16" VerticalAlignment="Center" Source="pack://application:,,,/CarouselCellType;component/Images/Delete_Icon_16.png"></Image>                            
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <Hyperlink Click="SelectImageHyperlink_Click">
+                                <TextBlock Text="{x:Static local:Resource.ImagesEditor_SelectImage}"></TextBlock>
+                            </Hyperlink>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</local:MyUserControl>
